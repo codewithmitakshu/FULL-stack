@@ -1,0 +1,30 @@
+import React from "react";
+
+const ProductCard = ({ name, price, inStock }) => {
+  return (
+    <div className="max-w-xs bg-white rounded-2xl shadow-md p-4 m-3 border hover:shadow-lg transition">
+      <h2 className="text-xl font-semibold mb-2">{name}</h2>
+      <p className="text-gray-700 mb-1">Price: ₹{price}</p>
+      <p
+        className={`${
+          inStock ? "text-green-600" : "text-red-500"
+        } font-medium`}
+      >
+        {inStock ? "In Stock ✅" : "Out of Stock ❌"}
+      </p>
+    </div>
+  );
+};
+
+const App = () => {
+  return (
+    <div className="min-h-screen bg-gray-100 flex flex-wrap justify-center items-center p-6">
+      <ProductCard name="iPhone 15 Pro" price={129999} inStock={true} />
+      <ProductCard name="Samsung Galaxy S24" price={99999} inStock={false} />
+      <ProductCard name="Boat Headphones" price={1999} inStock={true} />
+      <ProductCard name="Sony PlayStation 5" price={54999} inStock={true} />
+    </div>
+  );
+};
+
+export default App;
