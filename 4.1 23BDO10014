@@ -1,0 +1,34 @@
+from pymongo import MongoClient
+from datetime import datetime
+
+
+client = MongoClient("mongodb://localhost:27017/")
+
+
+db = client["ecommerce"]
+products = db["products"]
+
+
+product = {
+    "name": "Laptop",
+    "description": "A powerful laptop with 16GB RAM and 512GB SSD",
+    "price": 1200,
+    "category": "Electronics",
+    "images": ["image1.jpg", "image2.jpg"],
+    "reviews": [
+        {"user": "JohnDoe", "rating": 5, "comment": "Great laptop, very fast!"},
+        {"user": "JaneSmith", "rating": 4, "comment": "Good, but a bit heavy."}
+    ],
+    "inventory": {
+        "stock": 50,
+        "warehouse_location": "A1"
+    },
+    "created_at": datetime.utcnow()
+}
+
+
+product_id = products.insert_one(product).inserted_id
+print(f"Product inserted with ID: {product_id}")
+
+fetched_product = products.find_one({"_id": product_id})
+print(f"Fetched Product: {fetched_product}")
